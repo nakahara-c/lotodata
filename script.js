@@ -1,0 +1,1 @@
+window.alert("hello, and goodbye..");
