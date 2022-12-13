@@ -1,1 +1,2 @@
-window.alert("hello, and goodbye..");
+const title = document.getElementById('title');
+title.setAttribute('style', 'border:3px solid red');
