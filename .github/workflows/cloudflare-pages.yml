@@ -36,5 +36,3 @@ jobs:
           projectName: lotodata
           directory: .vercel/output/static
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
