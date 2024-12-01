@@ -24,6 +24,8 @@ jobs:
         run: npm install
       
       - name: Build the project
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npx @cloudflare/next-on-pages --experimental-minify
 
       - name: Publish to Cloudflare Pages
@@ -33,4 +35,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           projectName: lotodata
           directory: .vercel/output/static
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
