@@ -7,29 +7,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  title     String   @db.VarChar(255)
-  createdAt DateTime @default(now()) @db.Timestamp(0)
-  content   String?  @db.Text
-  published Boolean  @default(false)
-  authorId  Int
-  User      User     @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Post_ibfk_1")
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model results {
+  id              String   @db.VarChar(10)
+  draw_number     String   @db.VarChar(20)
+  draw_date       DateTime @db.Date
+  number1         Int      @db.UnsignedTinyInt
+  number2         Int      @db.UnsignedTinyInt
+  number3         Int      @db.UnsignedTinyInt
+  number4         Int      @db.UnsignedTinyInt
+  number5         Int      @db.UnsignedTinyInt
+  number6         Int      @db.UnsignedTinyInt
+  number7         Int      @db.UnsignedTinyInt
+  bonus1          Int?     @db.UnsignedTinyInt
+  bonus2          Int?     @db.UnsignedTinyInt
+  winning_tickets String?  @db.VarChar(20)
+  prize_amount    String?  @db.VarChar(30)
+  carryover       String?  @db.VarChar(30)
 
-  @@index([authorId], map: "authorId")
-}
-
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String? @db.Text
-  userId Int     @unique(map: "userId")
-  User   User    @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Profile_ibfk_1")
-}
-
-model User {
-  id      Int      @id @default(autoincrement())
-  name    String?  @db.VarChar(255)
-  email   String   @unique(map: "email") @db.VarChar(255)
-  Post    Post[]
-  Profile Profile?
+  @@id([id, draw_number])
 }
