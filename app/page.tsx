@@ -4,14 +4,8 @@ const prisma = new PrismaClient();
 
 export default async function Home() {
   const results = await prisma.results.findMany({
-    where: {
-      draw_date: {
-        gte: new Date('2022-01-01'),
-        lt: new Date('2022-12-31'),
-      },
-    },
     orderBy: {
-      draw_date: 'asc',
+      draw_date: 'desc',
     },
   });
 
